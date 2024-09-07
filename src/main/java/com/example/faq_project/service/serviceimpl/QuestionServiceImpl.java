@@ -21,9 +21,8 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionModel toModel(QuestionEntity entity) {
         return QuestionModel.builder()
                 .id(entity.getId())
-                .writer(entity.getWriter())
                 .title(entity.getTitle())
-                .contents(entity.getContents())
+                .content(entity.getContent())
                 .build();
     }
 
@@ -31,9 +30,8 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionEntity toEntity(QuestionModel model) {
         return QuestionEntity.builder()
                 .id(model.getId())
-                .writer(model.getWriter())
                 .title(model.getTitle())
-                .contents(model.getContents())
+                .content(model.getContent())
                 .build();
     }
 

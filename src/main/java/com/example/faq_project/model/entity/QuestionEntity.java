@@ -3,28 +3,38 @@ package com.example.faq_project.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @ToString
-@Table(name = "questions")
+@Table(name = "faqs")
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@AllArgsConstructor
+
 public class QuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String writer; // 작성자
-    private String title;  // 제목
-    private String contents; // 내용
+    // false로 선언을 해서, 값이 반드시 존재 해야 필드로 동작을 한다.
+    // NULL을 허용하지 않는다는 뜻이다.
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
+    @Column(name = "title", nullable = false)
+    private String title;
 
-    public QuestionEntity(Long id, String writer, String title, String contents) {
-        this.id = id;
-        this.writer = writer;
-        this.title = title;
-        this.contents = contents;
-    }
+    @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
+    private String content;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }
+
